@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #071827;
+  --navy-secondary: #10283a;
+  --cream: #e8ddd0;
+  --parchment: #f4eee7;
+  --copper: #9b581c;
+  --copper-hover: #b76d2b;
+  --forest: #293b12;
+  --charcoal: #242424;
+  --muted: #746b63;
+  --soft-white: #f7f4ef;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-navy-secondary: var(--navy-secondary);
+  --color-cream: var(--cream);
+  --color-parchment: var(--parchment);
+  --color-copper: var(--copper);
+  --color-copper-hover: var(--copper-hover);
+  --color-forest: var(--forest);
+  --color-charcoal: var(--charcoal);
+  --color-muted: var(--muted);
+  --color-soft-white: var(--soft-white);
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-source-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--parchment);
+  color: var(--navy);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--copper) 35%, transparent);
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+}
+
+.copper-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+}
+
+.copper-rule::before,
+.copper-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--copper);
+  opacity: 0.85;
 }
