@@ -63,33 +63,20 @@ export default function HomePage() {
           </div>
 
           <div className="copper-rule mb-8 text-[0.7rem] tracking-[0.28em] text-copper uppercase">
-            Upper Peninsula Craftsmanship
+            Proudly Serving the Copper Country
           </div>
 
           <h1 className="max-w-3xl font-serif text-4xl leading-tight font-medium text-navy sm:text-5xl md:text-6xl">
             {siteConfig.tagline}
           </h1>
-
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            {siteConfig.description}
-          </p>
-
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <ButtonLink href="/gallery">
-              {siteConfig.about.ctaPortfolio}
-            </ButtonLink>
-            <ButtonLink href="/contact" variant="secondary">
-              {siteConfig.about.ctaContact}
-            </ButtonLink>
-          </div>
         </div>
         <div className="h-2 bg-navy" aria-hidden />
       </section>
 
-      <section className="bg-soft-white">
+      <section id="about" className="scroll-mt-28 bg-soft-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:py-20 md:grid-cols-2 md:items-start md:gap-16">
           <div className="relative mx-auto w-full max-w-md md:max-w-none">
-            <div className="relative aspect-[3/4] overflow-hidden border border-navy/10 bg-parchment">
+            <div className="relative aspect-[3/4] overflow-hidden border border-navy/10 bg-parchment shadow-md">
               <Image
                 src={siteConfig.about.image}
                 alt={siteConfig.about.imageAlt}
@@ -102,10 +89,7 @@ export default function HomePage() {
           </div>
 
           <div>
-            <p className="text-xs tracking-[0.22em] text-copper uppercase">
-              About
-            </p>
-            <h2 className="mt-3 font-serif text-3xl text-navy sm:text-4xl">
+            <h2 className="font-serif text-3xl text-navy sm:text-4xl">
               {siteConfig.about.heading}
             </h2>
             <div className="mt-6 space-y-5 text-base leading-relaxed text-charcoal/90 sm:text-[1.05rem]">
@@ -113,60 +97,36 @@ export default function HomePage() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+            <div className="mt-10">
               <ButtonLink href="/gallery">
                 {siteConfig.about.ctaPortfolio}
-              </ButtonLink>
-              <ButtonLink href="/contact" variant="secondary">
-                {siteConfig.about.ctaContact}
               </ButtonLink>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-navy/10 bg-parchment">
+      <section
+        id="contact"
+        className="scroll-mt-28 border-t border-navy/10 bg-parchment"
+      >
         <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:py-20">
-          <div className="mx-auto mb-6 h-px w-16 bg-forest/50" aria-hidden />
           <h2 className="font-serif text-3xl text-navy sm:text-4xl">
-            {siteConfig.philosophy.heading}
+            {siteConfig.about.ctaContact}
           </h2>
-          <div className="mt-8 space-y-5 text-left text-base leading-relaxed text-charcoal/90 sm:text-center sm:text-[1.05rem]">
-            {siteConfig.philosophy.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-soft-white">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
-          <div className="max-w-2xl">
-            <p className="text-xs tracking-[0.22em] text-copper uppercase">
-              Services
-            </p>
-            <h2 className="mt-3 font-serif text-3xl text-navy sm:text-4xl">
-              What We Build
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted">
-              Representative work until final services are confirmed — each
-              project is scoped to the home and the details that matter.
-            </p>
-          </div>
-
-          <ul className="mt-10 grid gap-px border border-navy/15 bg-navy/15 sm:grid-cols-2 lg:grid-cols-3">
-            {siteConfig.services.map((service) => (
-              <li
-                key={service}
-                className="bg-parchment px-6 py-7 text-sm tracking-[0.08em] text-navy uppercase"
-              >
-                {service}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-12 flex justify-center">
-            <ButtonLink href="/contact">Discuss Your Project</ButtonLink>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            <a
+              href={siteConfig.phoneHref}
+              className="inline-flex items-center justify-center border border-navy bg-navy px-6 py-3 text-sm tracking-[0.12em] text-cream uppercase transition-colors hover:bg-navy-secondary"
+            >
+              Call {siteConfig.phone}
+            </a>
+            <a
+              href={siteConfig.emailHref}
+              className="inline-flex items-center justify-center border border-copper bg-transparent px-6 py-3 text-sm tracking-[0.12em] text-navy uppercase transition-colors hover:border-copper-hover hover:text-copper-hover"
+            >
+              Email {siteConfig.email}
+            </a>
           </div>
         </div>
       </section>

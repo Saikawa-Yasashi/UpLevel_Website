@@ -8,17 +8,17 @@ import {
   useRef,
   type TouchEvent,
 } from "react";
-import type { GalleryImage } from "@/lib/gallery";
+import type { GalleryMedia } from "@/lib/gallery";
 
 type LightboxProps = {
-  images: GalleryImage[];
+  media: GalleryMedia[];
   index: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
 };
 
 export function Lightbox({
-  images,
+  media,
   index,
   onClose,
   onNavigate,
@@ -28,9 +28,9 @@ export function Lightbox({
   const titleId = useId();
   const touchStartX = useRef<number | null>(null);
 
-  const current = images[index];
+  const current = media[index];
   const hasPrev = index > 0;
-  const hasNext = index < images.length - 1;
+  const hasNext = index < media.length - 1;
 
   const goPrev = useCallback(() => {
     if (hasPrev) onNavigate(index - 1);
@@ -50,7 +50,7 @@ export function Lightbox({
       if (event.key === "ArrowRight") goNext();
       if (event.key === "Tab" && dialogRef.current) {
         const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+          'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"]), video',
         );
         if (focusable.length === 0) return;
         const first = focusable[0];
@@ -124,7 +124,7 @@ export function Lightbox({
         }}
         disabled={!hasPrev}
         className="absolute top-1/2 left-3 z-10 -translate-y-1/2 border border-cream/30 bg-navy px-3 py-3 text-cream disabled:opacity-30 sm:left-6"
-        aria-label="Previous image"
+        aria-label="Previous item"
       >
         ‹
       </button>
@@ -137,7 +137,7 @@ export function Lightbox({
         }}
         disabled={!hasNext}
         className="absolute top-1/2 right-3 z-10 -translate-y-1/2 border border-cream/30 bg-navy px-3 py-3 text-cream disabled:opacity-30 sm:right-6"
-        aria-label="Next image"
+        aria-label="Next item"
       >
         ›
       </button>
@@ -148,22 +148,34 @@ export function Lightbox({
       >
         <div
           key={current.src}
-          className="relative mx-auto aspect-[4/3] max-h-[75vh] w-full"
+          className="relative mx-auto flex max-h-[75vh] w-full items-center justify-center"
           onClick={(event) => event.stopPropagation()}
         >
-          <Image
-            src={current.src}
-            alt={current.alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 1024px"
-            className="object-contain"
-            quality={85}
-            priority
-          />
+          {current.type === "video" ? (
+            <video
+              src={current.src}
+              controls
+              playsInline
+              className="max-h-[75vh] w-full bg-navy object-contain"
+              aria-label={current.alt}
+            />
+          ) : (
+            <div className="relative aspect-[4/3] max-h-[75vh] w-full">
+              <Image
+                src={current.src}
+                alt={current.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-contain"
+                quality={85}
+                priority
+              />
+            </div>
+          )}
         </div>
         <p className="mt-4 text-center text-sm text-cream/80">{current.alt}</p>
         <p className="mt-1 text-center text-xs tracking-[0.12em] text-cream/50 uppercase">
-          {index + 1} / {images.length}
+          {index + 1} / {media.length}
         </p>
       </div>
     </div>

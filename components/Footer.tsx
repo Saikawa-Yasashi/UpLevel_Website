@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Logo } from "@/components/Logo";
 import { siteConfig } from "@/config/site";
 
 export function Footer() {
@@ -7,16 +6,7 @@ export function Footer() {
 
   return (
     <footer className="mt-auto border-t border-navy/10 bg-navy text-cream">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-16 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="space-y-5">
-          <div className="rounded-sm bg-parchment px-3 py-2 inline-block">
-            <Logo size="footer" />
-          </div>
-          <p className="max-w-sm text-sm leading-relaxed text-cream/80">
-            {siteConfig.shortDescription}
-          </p>
-        </div>
-
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-16 md:grid-cols-2">
         <div className="space-y-3 text-sm">
           <h2 className="font-serif text-xl text-cream">Contact</h2>
           <p>
@@ -39,7 +29,7 @@ export function Footer() {
         </div>
 
         <div className="space-y-3 text-sm">
-          <h2 className="font-serif text-xl text-cream">Explore</h2>
+          <h2 className="font-serif text-xl text-cream">Navigation</h2>
           <nav className="flex flex-col gap-2" aria-label="Footer">
             {siteConfig.nav.map((item) => (
               <Link
@@ -59,9 +49,7 @@ export function Footer() {
           <p>
             © {year} {siteConfig.businessName}. All rights reserved.
           </p>
-          <p className="text-cream/45">
-            Craftsmanship for Michigan&apos;s Upper Peninsula
-          </p>
+          <p className="text-cream/45">{siteConfig.serviceArea}</p>
         </div>
       </div>
     </footer>

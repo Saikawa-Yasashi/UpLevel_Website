@@ -43,8 +43,5 @@ next-env.d.ts
 # Salesforce leftover
 .sf/
 
-# Keep env example
-!.env.example
-
-# Raw client photos
+# Raw client photos (web-ready copies live in public/gallery/)
 Photos/

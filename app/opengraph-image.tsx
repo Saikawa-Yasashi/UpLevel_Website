@@ -60,7 +60,7 @@ export default function OpenGraphImage() {
             maxWidth: 760,
           }}
         >
-          Custom homes and fine carpentry in Michigan&apos;s Upper Peninsula
+          Proudly Serving the Copper Country
         </div>
       </div>
     ),
