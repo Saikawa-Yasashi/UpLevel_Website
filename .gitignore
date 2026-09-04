@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Keep env example
 !.env.example
+
+# Raw client photos
+Photos/
