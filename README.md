@@ -1,6 +1,6 @@
 # Uplevel Carpentry Website
 
-A polished, static-first website for Uplevel Carpentry — custom homes and fine carpentry in Michigan's Upper Peninsula.
+A polished, static-first website for Uplevel Carpentry — custom finished carpentry and design serving Michigan's Copper Country.
 
 Built with Next.js (App Router), TypeScript, and Tailwind CSS.
 
@@ -19,7 +19,7 @@ Most contact details and marketing copy live in one file:
 
 **`config/site.ts`**
 
-Update phone, email, service area, owner name, About copy, and services there. Changes apply across the header, footer, contact page, and SEO metadata.
+Update phone, email, service area, owner name, About copy, and SEO metadata there. Changes apply across the header, footer, homepage, and structured data.
 
 ## Change the phone number
 
@@ -27,8 +27,8 @@ Update phone, email, service area, owner name, About copy, and services there. C
 2. Update `phone` (display text) and `phoneHref` (tel link), for example:
 
 ```ts
-phone: "(906) 555-1234",
-phoneHref: "tel:+19065551234",
+phone: "(906) 319-0678",
+phoneHref: "tel:+19063190678",
 ```
 
 ## Change the email
@@ -39,37 +39,33 @@ phoneHref: "tel:+19065551234",
 ## Edit About copy
 
 1. Open `config/site.ts`
-2. Edit the `about` and `philosophy` sections
-3. Home page hero text can be changed via `tagline` and `description`
+2. Edit the `about` section
+3. Home page hero text can be changed via `tagline`
 
-## Add gallery photographs
+Visitors contact David through Call / Email buttons on the homepage (`/#contact`). The `/contact` route permanently redirects there.
 
-1. Put image files in **`public/gallery/`**
-2. Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`
-3. Use descriptive filenames like `kitchen-walnut-cabinets-01.jpg`
-4. Commit and redeploy — images appear automatically
+## Add gallery albums
 
-No React or code edits are required.
+Organize portfolio media into album folders under **`public/gallery/`**:
 
-## Configure the contact form (Formspree)
-
-1. Create a form at [formspree.io](https://formspree.io)
-2. Copy your form endpoint URL
-3. Create `.env.local` from the example:
-
-```bash
-cp .env.example .env.local
+```
+public/gallery/
+  010/
+    kitchen-01.jpg
+    detail-02.jpg
+    walkthrough.mp4
+  020/
+    exterior-01.jpg
 ```
 
-4. Set the endpoint:
+- Each immediate subdirectory is one untitled album (visual separation only — no album titles on the page)
+- Folder and file names sort predictably (numeric-aware)
+- Loose files placed directly in `public/gallery/` appear as a miscellaneous album
+- Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`, and browser-ready `.mp4`
+- Convert iPhone `.mov` files to `.mp4` before adding them (Live Photo companion `.mov` files are usually not portfolio videos)
+- Commit the web-ready files in `public/gallery/` and redeploy — media appear automatically
 
-```env
-NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
-```
-
-5. Restart the dev server
-
-If the endpoint is not configured, the contact page still works — visitors can call or email, and a development notice appears on the form.
+Raw client dumps can stay in a local `Photos/` folder (gitignored). Do not commit original HEIC/MOV dumps.
 
 ## Deploy to Vercel
 
@@ -77,8 +73,7 @@ If the endpoint is not configured, the contact page still works — visitors can
 2. Sign in at [vercel.com](https://vercel.com) and click **Add New Project**
 3. Import the repository
 4. Vercel detects Next.js automatically — use the default build settings
-5. Add `NEXT_PUBLIC_FORMSPREE_ENDPOINT` under **Settings → Environment Variables**
-6. Deploy
+5. Deploy
 
 Each push to your main branch triggers a new deployment.
 
@@ -96,11 +91,12 @@ Update `siteConfig.seo.siteUrl` in `config/site.ts` to match your live domain.
 
 ```
 app/              Pages and routes
-components/       Header, Footer, Gallery, ContactForm, etc.
+components/       Header, Footer, Gallery, Lightbox, etc.
 config/site.ts    Editable business information
-lib/gallery.ts    Reads gallery images at build time
+lib/gallery.ts    Reads album folders at build time
 public/brand/     Logo
-public/gallery/   Project photos (drop files here)
+public/about/     About portrait
+public/gallery/   Portfolio albums (subfolders)
 ```
 
 ## Scripts

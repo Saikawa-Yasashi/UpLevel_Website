@@ -5,7 +5,7 @@ import { getGalleryAlbums } from "@/lib/gallery";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Portfolio of custom finished carpentry and design by Uplevel Carpentry in Michigan's Copper Country.",
+    "A selection of finished carpentry and design projects by Uplevel Carpentry in Michigan's Copper Country.",
 };
 
 export default async function GalleryPage() {

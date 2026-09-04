@@ -71,10 +71,11 @@ export function Header() {
           aria-label="Primary"
         >
           {siteConfig.nav.map((item) => {
+            const pathOnly = item.href.split("#")[0] || "/";
             const isActive =
-              item.href === "/"
+              pathOnly === "/"
                 ? pathname === "/"
-                : pathname.startsWith(item.href);
+                : pathname.startsWith(pathOnly);
             return (
               <Link
                 key={item.href}
@@ -134,10 +135,11 @@ export function Header() {
           aria-label="Mobile"
         >
           {siteConfig.nav.map((item) => {
+            const pathOnly = item.href.split("#")[0] || "/";
             const isActive =
-              item.href === "/"
+              pathOnly === "/"
                 ? pathname === "/"
-                : pathname.startsWith(item.href);
+                : pathname.startsWith(pathOnly);
             return (
               <Link
                 key={item.href}

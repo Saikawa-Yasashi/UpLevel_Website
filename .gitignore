@@ -43,5 +43,5 @@ next-env.d.ts
 # Salesforce leftover
 .sf/
 
-# Raw client photos (web-ready copies live in public/gallery/)
+# Raw client photo dumps (web-ready copies live in public/gallery/)
 Photos/

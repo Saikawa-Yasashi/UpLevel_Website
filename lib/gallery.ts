@@ -23,12 +23,15 @@ export type GalleryMedia = {
   filename: string;
   alt: string;
   type: GalleryMediaType;
+  albumId: string;
 };
 
+/** @deprecated Prefer GalleryMedia — kept for gradual call-site updates */
+export type GalleryImage = GalleryMedia;
+
 export type GalleryAlbum = {
-  /** Folder name under public/gallery, or "root" for loose files */
   id: string;
-  items: GalleryMedia[];
+  media: GalleryMedia[];
 };
 
 function filenameToAlt(filename: string): string {
@@ -39,51 +42,61 @@ function filenameToAlt(filename: string): string {
     .trim();
 
   if (!words) {
-    return "Project photograph";
+    return "Project media";
   }
 
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-function mediaTypeForExtension(ext: string): GalleryMediaType {
+function mediaTypeFromExt(ext: string): GalleryMediaType {
   return VIDEO_EXTENSIONS.has(ext) ? "video" : "image";
 }
 
 function isSupportedMediaFile(name: string): boolean {
   if (name.startsWith(".")) return false;
   if (name.toLowerCase() === "readme.md") return false;
-  if (name.toLowerCase() === ".gitkeep") return false;
   const ext = path.extname(name).toLowerCase();
   return SUPPORTED_EXTENSIONS.has(ext);
 }
 
-function toMedia(filename: string, srcPrefix: string): GalleryMedia {
+function toMedia(
+  filename: string,
+  srcPath: string,
+  albumId: string,
+): GalleryMedia {
   const ext = path.extname(filename).toLowerCase();
   return {
-    src: `${srcPrefix}/${filename}`,
+    src: srcPath,
     filename,
     alt: filenameToAlt(filename),
-    type: mediaTypeForExtension(ext),
+    type: mediaTypeFromExt(ext),
+    albumId,
   };
 }
 
-function sortFilenames(names: string[]): string[] {
-  return names.sort((a, b) =>
-    a.localeCompare(b, undefined, { sensitivity: "base", numeric: true }),
-  );
-}
+async function readMediaFromDir(
+  absoluteDir: string,
+  urlPrefix: string,
+  albumId: string,
+): Promise<GalleryMedia[]> {
+  const entries = await readdir(absoluteDir, { withFileTypes: true });
 
-/** Flat list of all media across albums (for lightbox navigation). */
-export function flattenGalleryMedia(albums: GalleryAlbum[]): GalleryMedia[] {
-  return albums.flatMap((album) => album.items);
+  return entries
+    .filter((entry) => entry.isFile() && isSupportedMediaFile(entry.name))
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }))
+    .map((filename) =>
+      toMedia(filename, `${urlPrefix}/${filename}`, albumId),
+    );
 }
 
 /**
- * Reads public/gallery. Each immediate subdirectory is one untitled album.
- * Loose files in the gallery root are grouped as a miscellaneous album.
+ * Reads `public/gallery` as untitled albums:
+ * - each immediate subfolder is one album (sorted by folder name)
+ * - root-level files (if any) become a miscellaneous album
  *
  * Supported: .jpg, .jpeg, .png, .webp, .avif, .mp4
- * Convert iPhone .mov files to .mp4 before adding them.
+ * Convert iPhone .mov files to .mp4 before placing them in the gallery.
  */
 export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
   const galleryDir = path.join(process.cwd(), "public", "gallery");
@@ -92,39 +105,25 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
     const entries = await readdir(galleryDir, { withFileTypes: true });
     const albums: GalleryAlbum[] = [];
 
-    const directories = entries
+    const folders = entries
       .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
       .map((entry) => entry.name)
-      .sort((a, b) =>
-        a.localeCompare(b, undefined, { sensitivity: "base", numeric: true }),
+      .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+
+    for (const folder of folders) {
+      const media = await readMediaFromDir(
+        path.join(galleryDir, folder),
+        `/gallery/${folder}`,
+        folder,
       );
-
-    for (const dirName of directories) {
-      const dirPath = path.join(galleryDir, dirName);
-      const files = await readdir(dirPath);
-      const mediaNames = sortFilenames(files.filter(isSupportedMediaFile));
-
-      if (mediaNames.length === 0) continue;
-
-      albums.push({
-        id: dirName,
-        items: mediaNames.map((filename) =>
-          toMedia(filename, `/gallery/${dirName}`),
-        ),
-      });
+      if (media.length > 0) {
+        albums.push({ id: folder, media });
+      }
     }
 
-    const rootFiles = sortFilenames(
-      entries
-        .filter((entry) => entry.isFile() && isSupportedMediaFile(entry.name))
-        .map((entry) => entry.name),
-    );
-
-    if (rootFiles.length > 0) {
-      albums.push({
-        id: "root",
-        items: rootFiles.map((filename) => toMedia(filename, "/gallery")),
-      });
+    const rootMedia = await readMediaFromDir(galleryDir, "/gallery", "root");
+    if (rootMedia.length > 0) {
+      albums.push({ id: "root", media: rootMedia });
     }
 
     return albums;
@@ -133,8 +132,8 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
   }
 }
 
-/** @deprecated Prefer getGalleryAlbums — kept for any flat consumers */
+/** Flat list of all gallery media across albums (lightbox navigation). */
 export async function getGalleryImages(): Promise<GalleryMedia[]> {
   const albums = await getGalleryAlbums();
-  return flattenGalleryMedia(albums);
+  return albums.flatMap((album) => album.media);
 }

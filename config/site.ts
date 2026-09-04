@@ -40,7 +40,7 @@ export const siteConfig = {
     image: "/about/david-vanderzon.jpg",
     imageAlt: "David VanderZon at work in finished carpentry",
     paragraphs: [
-      "David VanderZon's career has taken him from Michigan to the demanding world of high-end residential construction in Jackson, Wyoming, where he honed his craft working on remarkable custom homes requiring exceptional precision, finish work, and attention to detail.",
+      "David's career has taken him from Michigan to the demanding world of high-end residential construction in Jackson, Wyoming, where he honed his craft working on remarkable custom homes requiring exceptional precision, finish work, and attention to detail.",
       "Now based in Michigan's Upper Peninsula, David brings that same level of craftsmanship to homes, renovations, custom carpentry and one-of-a-kind residential projects closer to home.",
     ],
     ctaPortfolio: "View My Portfolio",

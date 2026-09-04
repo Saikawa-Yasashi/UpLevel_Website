@@ -11,14 +11,14 @@ import {
 import type { GalleryMedia } from "@/lib/gallery";
 
 type LightboxProps = {
-  media: GalleryMedia[];
+  images: GalleryMedia[];
   index: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
 };
 
 export function Lightbox({
-  media,
+  images,
   index,
   onClose,
   onNavigate,
@@ -28,9 +28,9 @@ export function Lightbox({
   const titleId = useId();
   const touchStartX = useRef<number | null>(null);
 
-  const current = media[index];
+  const current = images[index];
   const hasPrev = index > 0;
-  const hasNext = index < media.length - 1;
+  const hasNext = index < images.length - 1;
 
   const goPrev = useCallback(() => {
     if (hasPrev) onNavigate(index - 1);
@@ -124,7 +124,7 @@ export function Lightbox({
         }}
         disabled={!hasPrev}
         className="absolute top-1/2 left-3 z-10 -translate-y-1/2 border border-cream/30 bg-navy px-3 py-3 text-cream disabled:opacity-30 sm:left-6"
-        aria-label="Previous item"
+        aria-label="Previous media"
       >
         ‹
       </button>
@@ -137,7 +137,7 @@ export function Lightbox({
         }}
         disabled={!hasNext}
         className="absolute top-1/2 right-3 z-10 -translate-y-1/2 border border-cream/30 bg-navy px-3 py-3 text-cream disabled:opacity-30 sm:right-6"
-        aria-label="Next item"
+        aria-label="Next media"
       >
         ›
       </button>
@@ -155,10 +155,12 @@ export function Lightbox({
             <video
               src={current.src}
               controls
+              autoPlay
               playsInline
               className="max-h-[75vh] w-full bg-navy object-contain"
-              aria-label={current.alt}
-            />
+            >
+              Your browser does not support this video.
+            </video>
           ) : (
             <div className="relative aspect-[4/3] max-h-[75vh] w-full">
               <Image
@@ -175,7 +177,7 @@ export function Lightbox({
         </div>
         <p className="mt-4 text-center text-sm text-cream/80">{current.alt}</p>
         <p className="mt-1 text-center text-xs tracking-[0.12em] text-cream/50 uppercase">
-          {index + 1} / {media.length}
+          {index + 1} / {images.length}
         </p>
       </div>
     </div>

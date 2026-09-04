@@ -75,14 +75,15 @@ export default function HomePage() {
 
       <section id="about" className="scroll-mt-28 bg-soft-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:py-20 md:grid-cols-2 md:items-start md:gap-16">
-          <div className="relative mx-auto w-full max-w-md md:max-w-none">
-            <div className="relative aspect-[3/4] overflow-hidden border border-navy/10 bg-parchment shadow-md">
+          <div className="flex justify-center md:self-start">
+            <div className="w-2/3 overflow-hidden border border-navy/10 bg-parchment shadow-md">
               <Image
                 src={siteConfig.about.image}
                 alt={siteConfig.about.imageAlt}
-                fill
-                sizes="(max-width: 768px) 90vw, 45vw"
-                className="object-cover object-center"
+                width={316}
+                height={600}
+                sizes="(max-width: 768px) 60vw, 22vw"
+                className="h-auto w-full"
                 priority
               />
             </div>
@@ -102,31 +103,26 @@ export default function HomePage() {
                 {siteConfig.about.ctaPortfolio}
               </ButtonLink>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section
-        id="contact"
-        className="scroll-mt-28 border-t border-navy/10 bg-parchment"
-      >
-        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:py-20">
-          <h2 className="font-serif text-3xl text-navy sm:text-4xl">
-            {siteConfig.about.ctaContact}
-          </h2>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <a
-              href={siteConfig.phoneHref}
-              className="inline-flex items-center justify-center border border-navy bg-navy px-6 py-3 text-sm tracking-[0.12em] text-cream uppercase transition-colors hover:bg-navy-secondary"
-            >
-              Call {siteConfig.phone}
-            </a>
-            <a
-              href={siteConfig.emailHref}
-              className="inline-flex items-center justify-center border border-copper bg-transparent px-6 py-3 text-sm tracking-[0.12em] text-navy uppercase transition-colors hover:border-copper-hover hover:text-copper-hover"
-            >
-              Email {siteConfig.email}
-            </a>
+            <div id="contact" className="mt-10 scroll-mt-28">
+              <h3 className="font-serif text-2xl text-navy sm:text-3xl">
+                {siteConfig.about.ctaContact}
+              </h3>
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4">
+                <a
+                  href={siteConfig.phoneHref}
+                  className="inline-flex items-center justify-center border border-navy bg-navy px-6 py-3 text-sm tracking-[0.12em] text-cream uppercase transition-colors hover:bg-navy-secondary"
+                >
+                  Call {siteConfig.phone}
+                </a>
+                <a
+                  href={siteConfig.emailHref}
+                  className="inline-flex items-center justify-center border border-copper bg-transparent px-6 py-3 text-sm tracking-[0.12em] text-navy uppercase transition-colors hover:border-copper-hover hover:text-copper-hover"
+                >
+                  Email {siteConfig.email}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
