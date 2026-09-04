@@ -6,8 +6,8 @@
 export const siteConfig = {
   businessName: "Uplevel Carpentry",
   ownerName: "David VanderZon",
-  phone: "(906) 319-0678",
-  phoneHref: "tel:+19063190678",
+  phone: "(906) 319-1678",
+  phoneHref: "tel:+19063191678",
   email: "uplevelcarpentry@gmail.com",
   emailHref: "mailto:uplevelcarpentry@gmail.com",
   serviceArea: "Proudly Serving the Copper Country",

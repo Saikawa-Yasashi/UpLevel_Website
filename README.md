@@ -27,8 +27,8 @@ Update phone, email, service area, owner name, About copy, and SEO metadata ther
 2. Update `phone` (display text) and `phoneHref` (tel link), for example:
 
 ```ts
-phone: "(906) 319-0678",
-phoneHref: "tel:+19063190678",
+phone: "(906) 319-1678",
+phoneHref: "tel:+19063191678",
 ```
 
 ## Change the email
