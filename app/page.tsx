@@ -57,16 +57,16 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-forest/40"
           aria-hidden
         />
-        <div className="mx-auto flex max-w-4xl flex-col items-center px-4 py-20 text-center sm:py-28">
+        <div className="mx-auto flex max-w-6xl flex-col items-center px-4 py-20 text-center sm:py-28">
           <div className="mb-10 rounded-sm bg-parchment px-2">
             <Logo size="footer" priority className="justify-center" />
           </div>
 
-          <div className="copper-rule mb-8 text-[0.7rem] tracking-[0.28em] text-copper uppercase">
+          <div className="copper-rule mb-8 text-[0.8rem] tracking-[0.28em] text-copper uppercase sm:text-[0.85rem]">
             Proudly Serving the Copper Country
           </div>
 
-          <h1 className="max-w-3xl font-serif text-4xl leading-tight font-medium text-navy sm:text-5xl md:text-6xl">
+          <h1 className="w-full whitespace-nowrap font-serif text-[clamp(1.35rem,4.2vw,3.75rem)] leading-tight font-medium text-navy">
             {siteConfig.tagline}
           </h1>
         </div>
@@ -111,15 +111,25 @@ export default function HomePage() {
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4">
                 <a
                   href={siteConfig.phoneHref}
-                  className="inline-flex items-center justify-center border border-navy bg-navy px-6 py-3 text-sm tracking-[0.12em] text-cream uppercase transition-colors hover:bg-navy-secondary"
+                  className="inline-flex flex-col items-center justify-center border border-navy bg-navy px-6 py-3 text-cream transition-colors hover:bg-navy-secondary"
                 >
-                  Call {siteConfig.phone}
+                  <span className="text-sm tracking-[0.12em] uppercase">
+                    Call
+                  </span>
+                  <span className="mt-1 text-sm tracking-normal normal-case">
+                    {siteConfig.phone}
+                  </span>
                 </a>
                 <a
                   href={siteConfig.emailHref}
-                  className="inline-flex items-center justify-center border border-copper bg-transparent px-6 py-3 text-sm tracking-[0.12em] text-navy uppercase transition-colors hover:border-copper-hover hover:text-copper-hover"
+                  className="inline-flex flex-col items-center justify-center border border-copper bg-transparent px-6 py-3 text-navy transition-colors hover:border-copper-hover hover:text-copper-hover"
                 >
-                  Email {siteConfig.email}
+                  <span className="text-sm tracking-[0.12em] uppercase">
+                    Email
+                  </span>
+                  <span className="mt-1 text-sm tracking-normal normal-case">
+                    {siteConfig.email}
+                  </span>
                 </a>
               </div>
             </div>
