@@ -5,14 +5,32 @@ import { siteConfig } from "@/config/site";
 type LogoProps = {
   className?: string;
   priority?: boolean;
-  /** Visual size variant for header vs hero */
+  /** Visual size / mark variant */
   size?: "header" | "hero" | "footer";
 };
 
 const sizeClasses = {
-  header: "h-14 w-auto sm:h-16",
+  header: "h-12 w-auto sm:h-14",
   hero: "h-44 w-auto sm:h-56 md:h-64",
-  footer: "h-20 w-auto sm:h-24",
+  footer: "h-16 w-auto sm:h-20",
+} as const;
+
+const logoAssets = {
+  header: {
+    src: "/brand/uplevel-carpentry-logo.png",
+    width: 1024,
+    height: 396,
+  },
+  footer: {
+    src: "/brand/uplevel-carpentry-logo.png",
+    width: 1024,
+    height: 396,
+  },
+  hero: {
+    src: "/brand/uplevel-carpentry-logo-round.png",
+    width: 600,
+    height: 600,
+  },
 } as const;
 
 export function Logo({
@@ -20,6 +38,8 @@ export function Logo({
   priority = false,
   size = "header",
 }: LogoProps) {
+  const asset = logoAssets[size];
+
   return (
     <Link
       href="/"
@@ -27,10 +47,10 @@ export function Logo({
       aria-label={`${siteConfig.businessName} home`}
     >
       <Image
-        src="/brand/uplevel-carpentry-logo.png"
+        src={asset.src}
         alt={siteConfig.businessName}
-        width={600}
-        height={600}
+        width={asset.width}
+        height={asset.height}
         priority={priority}
         className={`${sizeClasses[size]} object-contain object-left`}
       />
