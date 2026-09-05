@@ -175,7 +175,9 @@ export function Lightbox({
             </div>
           )}
         </div>
-        <p className="mt-4 text-center text-sm text-cream/80">{current.alt}</p>
+        {current.title ? (
+          <p className="mt-4 text-center text-sm text-cream/80">{current.title}</p>
+        ) : null}
         <p className="mt-1 text-center text-xs tracking-[0.12em] text-cream/50 uppercase">
           {index + 1} / {images.length}
         </p>

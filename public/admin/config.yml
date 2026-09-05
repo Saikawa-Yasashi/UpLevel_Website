@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Gallery order and titles for Uplevel Carpentry.
+# After deploying the free Sveltia CMS Authenticator Cloudflare Worker,
+# set backend.base_url to that Worker URL (no trailing slash).
+
+backend:
+  name: github
+  repo: Saikawa-Yasashi/UpLevel_Website
+  branch: main
+  base_url: https://sveltia-cms-auth.kacie-b49.workers.dev
+
+# Media lives under public/gallery; file paths stay locked (reorder + titles only).
+media_folder: public/gallery
+public_folder: /gallery
+
+collections:
+  - name: gallery
+    label: Gallery
+    files:
+      - name: order
+        label: Album & photo order
+        file: content/gallery-order.json
+        format: json
+        fields:
+          - name: albums
+            label: Albums
+            label_singular: Album
+            widget: list
+            summary: "{{fields.title}} — {{fields.id}}"
+            collapsed: true
+            allow_add: false
+            allow_remove: false
+            allow_duplicate: false
+            hint: Drag albums to change order. Add an optional title for each album. Do not rename folders.
+            fields:
+              - name: id
+                label: Album folder
+                widget: string
+                readonly: true
+                hint: Matches the folder name under public/gallery/
+              - name: title
+                label: Album title
+                widget: string
+                required: false
+                hint: Shown at the top of this album on the Gallery page. Leave blank for no title.
+              - name: media
+                label: Photos & videos
+                label_singular: Item
+                widget: list
+                summary: "{{fields.title}} — {{fields.src}}"
+                collapsed: true
+                allow_add: false
+                allow_remove: false
+                allow_duplicate: false
+                hint: Drag items to change order. Optional titles appear under each photo. Adding or deleting files is done by the site maintainer.
+                fields:
+                  - name: src
+                    label: File path
+                    widget: string
+                    readonly: true
+                  - name: title
+                    label: Photo title
+                    widget: string
+                    required: false
+                    hint: Shown under this photo on the Gallery page. Leave blank for no title.

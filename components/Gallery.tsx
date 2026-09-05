@@ -44,13 +44,18 @@ export function Gallery({ albums }: GalleryProps) {
         {albums.map((album, albumIndex) => (
           <section
             key={album.id}
-            aria-label={`Album ${albumIndex + 1}`}
+            aria-label={album.title || `Album ${albumIndex + 1}`}
             className={
               albumIndex > 0
                 ? "border-t border-navy/10 pt-16 sm:pt-20"
                 : undefined
             }
           >
+            {album.title ? (
+              <h2 className="mb-8 font-serif text-2xl text-navy sm:mb-10 sm:text-3xl">
+                {album.title}
+              </h2>
+            ) : null}
             <ul className="columns-1 gap-5 sm:columns-2 lg:columns-3">
               {album.media.map((item) => (
                 <li key={item.src} className="mb-5 break-inside-avoid">
@@ -87,48 +92,55 @@ function MediaThumb({
   item: GalleryMedia;
   onOpen: () => void;
 }) {
+  const label = item.title || item.alt;
+
   return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group relative block w-full overflow-hidden bg-soft-white text-left shadow-md transition-shadow hover:shadow-lg focus-visible:outline-copper"
-      aria-label={
-        item.type === "video"
-          ? `Play video: ${item.alt}`
-          : `View larger: ${item.alt}`
-      }
-    >
-      {item.type === "video" ? (
-        <div className="relative">
-          <video
-            src={item.src}
-            className="h-auto w-full object-cover"
-            muted
-            playsInline
-            preload="metadata"
-            aria-hidden
-          />
-          <span
-            className="pointer-events-none absolute inset-0 flex items-center justify-center bg-navy/25"
-            aria-hidden
-          >
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-cream/70 bg-navy/70 text-cream">
-              ▶
+    <figure className="overflow-hidden bg-soft-white shadow-md transition-shadow hover:shadow-lg">
+      <button
+        type="button"
+        onClick={onOpen}
+        className="group relative block w-full text-left focus-visible:outline-copper"
+        aria-label={
+          item.type === "video" ? `Play video: ${label}` : `View larger: ${label}`
+        }
+      >
+        {item.type === "video" ? (
+          <div className="relative">
+            <video
+              src={item.src}
+              className="h-auto w-full object-cover"
+              muted
+              playsInline
+              preload="metadata"
+              aria-hidden
+            />
+            <span
+              className="pointer-events-none absolute inset-0 flex items-center justify-center bg-navy/25"
+              aria-hidden
+            >
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-cream/70 bg-navy/70 text-cream">
+                ▶
+              </span>
             </span>
-          </span>
-        </div>
-      ) : (
-        <Image
-          src={item.src}
-          alt={item.alt}
-          width={900}
-          height={1200}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="h-auto w-full object-cover transition-opacity duration-300 group-hover:opacity-95"
-          quality={75}
-          loading="lazy"
-        />
-      )}
-    </button>
+          </div>
+        ) : (
+          <Image
+            src={item.src}
+            alt={item.alt}
+            width={900}
+            height={1200}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="h-auto w-full object-cover transition-opacity duration-300 group-hover:opacity-95"
+            quality={75}
+            loading="lazy"
+          />
+        )}
+      </button>
+      {item.title ? (
+        <figcaption className="px-3 py-2.5 text-sm leading-snug text-charcoal/85">
+          {item.title}
+        </figcaption>
+      ) : null}
+    </figure>
   );
 }
