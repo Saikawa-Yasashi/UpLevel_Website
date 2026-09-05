@@ -49,16 +49,20 @@ collections:
                 label_singular: Item
                 widget: list
                 summary: "{{fields.title}} — {{fields.src}}"
+                thumbnail: src
                 collapsed: true
                 allow_add: false
                 allow_remove: false
                 allow_duplicate: false
-                hint: Drag items to change order. Optional titles appear under each photo. Adding or deleting files is done by the site maintainer.
+                hint: Drag items to change order. Thumbnails help identify each photo. Optional titles appear under each photo on the site. Adding or deleting files is done by the site maintainer.
                 fields:
                   - name: src
-                    label: File path
-                    widget: string
+                    label: Photo / video
+                    widget: file
                     readonly: true
+                    choose_url: false
+                    accept: "image/*,.mp4,video/mp4"
+                    hint: Preview only — the file path is locked. Reorder with the drag handle.
                   - name: title
                     label: Photo title
                     widget: string
