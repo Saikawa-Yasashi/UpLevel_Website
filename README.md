@@ -53,14 +53,14 @@ The live gallery order is controlled by **`content/gallery-order.json`**, edited
 1. Open **`https://YOUR-DOMAIN/admin/`** (or `http://localhost:3000/admin/` while developing)
 2. Click **Login with GitHub** and approve access
 3. Open **Gallery → Album & photo order**
-4. Drag albums to change album order
+4. Drag albums to change album order, or use **Add** / **Remove** for albums
 5. Optionally set an **Album title** (shown at the top of that section on the Gallery page)
-6. Expand an album, drag photos/videos to change order, and optionally set a **Photo title** (shown under that photo)
+6. Expand an album, drag photos/videos, upload new ones, remove items, and optionally set a **Photo title**
 7. Click **Save**
 
-Saving commits the order file to the `main` branch on GitHub. Vercel then rebuilds and publishes the site (usually within a minute or two).
+Saving commits the order file (and any new uploads) to the `main` branch on GitHub. Vercel then rebuilds and publishes the site (usually within a minute or two).
 
-Paths are locked so albums/files cannot be renamed or deleted in the CMS. Titles are optional — leave blank to hide them. To add or replace photographs, send the files to the site maintainer (or ask them to update `public/gallery/` and refresh the order file).
+**Album folder ID** should be a short name without spaces (for example `120` or `kitchen-trim`). New photos upload into `public/gallery/<that-id>/`.
 
 ### One-time setup (maintainer): GitHub login for `/admin`
 

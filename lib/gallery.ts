@@ -203,9 +203,8 @@ async function loadManifest(): Promise<GalleryOrderManifest | null> {
 
 /**
  * Build albums from `content/gallery-order.json`.
- * Skips missing files; appends any on-disk media not listed in the manifest
- * at the end of each album (and appends unknown albums last) so new drops
- * still appear until the CMS order file is updated.
+ * Only items listed in the manifest are shown, so CMS add/remove controls
+ * what appears on the Gallery page. Missing files are skipped.
  */
 async function getAlbumsFromManifest(
   manifest: GalleryOrderManifest,
@@ -252,48 +251,9 @@ async function getAlbumsFromManifest(
       );
     }
 
-    // Append disk files missing from the manifest so new uploads still show.
-    try {
-      const diskMedia = await readMediaFromDir(
-        path.join(galleryDir, albumId),
-        `/gallery/${albumId}`,
-        albumId,
-      );
-      for (const item of diskMedia) {
-        if (seenSrcs.has(item.src)) continue;
-        seenSrcs.add(item.src);
-        media.push(item);
-      }
-    } catch {
-      // Album folder may not exist yet; keep listed items only.
-    }
-
     if (media.length > 0) {
       albums.push({ id: albumId, title: albumTitle, media });
     }
-  }
-
-  // Append albums that exist on disk but are not in the manifest.
-  try {
-    const entries = await readdir(galleryDir, { withFileTypes: true });
-    const folders = entries
-      .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
-      .map((entry) => entry.name)
-      .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-
-    for (const folder of folders) {
-      if (seenAlbumIds.has(folder)) continue;
-      const media = await readMediaFromDir(
-        path.join(galleryDir, folder),
-        `/gallery/${folder}`,
-        folder,
-      );
-      if (media.length > 0) {
-        albums.push({ id: folder, media });
-      }
-    }
-  } catch {
-    // Ignore filesystem errors; return what we have from the manifest.
   }
 
   return albums;

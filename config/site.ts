@@ -32,7 +32,7 @@ export const siteConfig = {
     title:
       "Uplevel Carpentry | Custom Finished Carpentry and Design in the Copper Country",
     description:
-      "Uplevel Carpentry provides custom finished carpentry and design serving Michigan's Copper Country. Craftsmanship refined through high-end residential work in Jackson, Wyoming.",
+      "Uplevel Carpentry provides custom finished carpentry and design serving Michigan's Copper Country. Craftsmanship refined through high-end residential work in Jackson Hole, Wyoming.",
     siteUrl: "https://uplevelcarpentry.com",
   },
   about: {
@@ -40,7 +40,7 @@ export const siteConfig = {
     image: "/about/david-vanderzon.jpg",
     imageAlt: "David VanderZon at work in finished carpentry",
     paragraphs: [
-      "David's career has taken him from Michigan to the demanding world of high-end residential construction in Jackson, Wyoming, where he honed his craft working on remarkable custom homes requiring exceptional precision, finish work, and attention to detail.",
+      "David's career has taken him from Michigan to the demanding world of high-end residential construction in Jackson Hole, Wyoming, where he honed his craft working on remarkable custom homes requiring exceptional precision, finish work, and attention to detail.",
       "Now based in Michigan's Upper Peninsula, David brings that same level of craftsmanship to homes, renovations, custom carpentry and one-of-a-kind residential projects closer to home.",
     ],
     ctaPortfolio: "View My Portfolio",

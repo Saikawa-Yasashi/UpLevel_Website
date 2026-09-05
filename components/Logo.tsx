@@ -5,13 +5,14 @@ import { siteConfig } from "@/config/site";
 type LogoProps = {
   className?: string;
   priority?: boolean;
-  /** Visual size variant for header vs footer */
-  size?: "header" | "footer";
+  /** Visual size variant for header vs hero */
+  size?: "header" | "hero" | "footer";
 };
 
 const sizeClasses = {
-  header: "h-12 w-auto sm:h-14",
-  footer: "h-16 w-auto sm:h-20",
+  header: "h-14 w-auto sm:h-16",
+  hero: "h-44 w-auto sm:h-56 md:h-64",
+  footer: "h-20 w-auto sm:h-24",
 } as const;
 
 export function Logo({
@@ -28,8 +29,8 @@ export function Logo({
       <Image
         src="/brand/uplevel-carpentry-logo.png"
         alt={siteConfig.businessName}
-        width={1024}
-        height={396}
+        width={600}
+        height={600}
         priority={priority}
         className={`${sizeClasses[size]} object-contain object-left`}
       />

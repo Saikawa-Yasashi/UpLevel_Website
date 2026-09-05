@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Gallery order and titles for Uplevel Carpentry.
+# Gallery order, titles, and media for Uplevel Carpentry.
 # After deploying the free Sveltia CMS Authenticator Cloudflare Worker,
 # set backend.base_url to that Worker URL (no trailing slash).
 
@@ -10,7 +10,7 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.kacie-b49.workers.dev
 
-# Media lives under public/gallery; file paths stay locked (reorder + titles only).
+# Default media root; per-album uploads use the nested media_folder below.
 media_folder: public/gallery
 public_folder: /gallery
 
@@ -29,16 +29,16 @@ collections:
             widget: list
             summary: "{{fields.title}} — {{fields.id}}"
             collapsed: true
-            allow_add: false
-            allow_remove: false
+            allow_add: true
+            allow_remove: true
             allow_duplicate: false
-            hint: Drag albums to change order. Add an optional title for each album. Do not rename folders.
+            hint: Drag to reorder. Add or remove albums here. New album Folder ID should be a short code like 120 (creates/uploads under public/gallery/120/).
             fields:
               - name: id
-                label: Album folder
+                label: Album folder ID
                 widget: string
-                readonly: true
-                hint: Matches the folder name under public/gallery/
+                hint: Short folder name only (example 120 or kitchen-cabinets). No spaces. Used as the folder under public/gallery/.
+                pattern: ["^[A-Za-z0-9][A-Za-z0-9_-]*$", "Use letters, numbers, hyphens, or underscores only (no spaces)."]
               - name: title
                 label: Album title
                 widget: string
@@ -51,18 +51,19 @@ collections:
                 summary: "{{fields.title}} — {{fields.src}}"
                 thumbnail: src
                 collapsed: true
-                allow_add: false
-                allow_remove: false
+                allow_add: true
+                allow_remove: true
                 allow_duplicate: false
-                hint: Drag items to change order. Thumbnails help identify each photo. Optional titles appear under each photo on the site. Adding or deleting files is done by the site maintainer.
+                hint: Drag to reorder. Add photos/videos or remove items. Optional titles appear under each photo on the site.
                 fields:
                   - name: src
                     label: Photo / video
                     widget: file
-                    readonly: true
                     choose_url: false
                     accept: "image/*,.mp4,video/mp4"
-                    hint: Preview only — the file path is locked. Reorder with the drag handle.
+                    media_folder: public/gallery/{{id}}
+                    public_folder: /gallery/{{id}}
+                    hint: Upload or choose a file for this album.
                   - name: title
                     label: Photo title
                     widget: string

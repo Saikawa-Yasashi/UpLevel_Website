@@ -59,7 +59,7 @@ export default function HomePage() {
         />
         <div className="mx-auto flex max-w-6xl flex-col items-center px-4 py-20 text-center sm:py-28">
           <div className="mb-10 rounded-sm bg-parchment px-2">
-            <Logo size="footer" priority className="justify-center" />
+            <Logo size="hero" priority className="justify-center" />
           </div>
 
           <div className="copper-rule mb-8 text-[0.8rem] tracking-[0.28em] text-copper uppercase sm:text-[0.85rem]">
