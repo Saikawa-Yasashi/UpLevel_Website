@@ -10,9 +10,9 @@ type LogoProps = {
 };
 
 const sizeClasses = {
-  header: "h-12 w-auto sm:h-14",
-  hero: "h-44 w-auto sm:h-56 md:h-64",
-  footer: "h-16 w-auto sm:h-20",
+  header: "h-12 w-auto object-left sm:h-14",
+  hero: "h-auto w-full object-center",
+  footer: "h-16 w-auto object-left sm:h-20",
 } as const;
 
 const logoAssets = {
@@ -27,9 +27,9 @@ const logoAssets = {
     height: 396,
   },
   hero: {
-    src: "/brand/uplevel-carpentry-logo-round.png",
-    width: 600,
-    height: 600,
+    src: "/brand/uplevel-carpentry-logo-wide.png",
+    width: 1774,
+    height: 887,
   },
 } as const;
 
@@ -43,7 +43,9 @@ export function Logo({
   return (
     <Link
       href="/"
-      className={`inline-flex items-center focus-visible:outline-offset-4 ${className}`}
+      className={`inline-flex items-center focus-visible:outline-offset-4 ${
+        size === "hero" ? "w-full" : ""
+      } ${className}`}
       aria-label={`${siteConfig.businessName} home`}
     >
       <Image
@@ -52,7 +54,8 @@ export function Logo({
         width={asset.width}
         height={asset.height}
         priority={priority}
-        className={`${sizeClasses[size]} object-contain object-left`}
+        sizes={size === "hero" ? "92vw" : undefined}
+        className={`${sizeClasses[size]} object-contain`}
       />
     </Link>
   );

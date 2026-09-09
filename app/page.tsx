@@ -57,11 +57,11 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-forest/40"
           aria-hidden
         />
-        <div className="mx-auto flex max-w-6xl flex-col items-center px-4 py-20 text-center sm:py-28">
-          <div className="mb-10 rounded-sm bg-parchment px-2">
-            <Logo size="hero" priority className="justify-center" />
-          </div>
+        <div className="mx-auto w-[92%] pt-10 sm:pt-14">
+          <Logo size="hero" priority className="justify-center" />
+        </div>
 
+        <div className="mx-auto flex max-w-6xl flex-col items-center px-4 pt-8 pb-20 text-center sm:pt-10 sm:pb-28">
           <div className="copper-rule mb-8 text-[0.8rem] tracking-[0.28em] text-copper uppercase sm:text-[0.85rem]">
             Proudly Serving the Copper Country
           </div>
