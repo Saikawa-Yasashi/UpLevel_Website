@@ -1,8 +1,8 @@
 {
   "albums": [
     {
-      "id": "010",
-      "title": "TEST TITLE",
+      "id": "001",
+      "title": "THE BARNS",
       "media": [
         {
           "src": "/gallery/010/10.jpg",
@@ -45,6 +45,10 @@
           "title": ""
         },
         {
+          "src": "/gallery/010/IMG_7179.jpg",
+          "title": ""
+        },
+        {
           "src": "/gallery/010/IMG_6525.jpg",
           "title": ""
         },
@@ -66,10 +70,6 @@
         },
         {
           "src": "/gallery/010/IMG_6881.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/010/IMG_7179.jpg",
           "title": ""
         },
         {
