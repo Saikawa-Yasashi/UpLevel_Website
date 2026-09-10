@@ -149,9 +149,25 @@
       ]
     },
     {
-      "id": "030",
-      "title": "",
+      "id": "003",
+      "title": "BIG RIG",
       "media": [
+        {
+          "src": "/gallery/030/IMG_0575.png",
+          "title": "CUSTOM OVERLAND VEHICLE  LOCATION: JACKSON HOLE, WY"
+        },
+        {
+          "src": "/gallery/030/IMG_0488.jpg",
+          "title": ""
+        },
+        {
+          "src": "/gallery/030/IMG_3949.jpg",
+          "title": ""
+        },
+        {
+          "src": "/gallery/030/IMG_8452.jpg",
+          "title": ""
+        },
         {
           "src": "/gallery/030/IMG_0430.jpg",
           "title": ""
@@ -161,27 +177,11 @@
           "title": ""
         },
         {
-          "src": "/gallery/030/IMG_0488.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/030/IMG_0575.png",
-          "title": ""
-        },
-        {
           "src": "/gallery/030/IMG_2918.jpg",
           "title": ""
         },
         {
           "src": "/gallery/030/IMG_2923.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/030/IMG_3949.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/030/IMG_8452.jpg",
           "title": ""
         },
         {
