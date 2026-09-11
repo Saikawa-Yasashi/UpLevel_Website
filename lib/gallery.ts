@@ -119,24 +119,45 @@ async function fileExists(absolutePath: string): Promise<boolean> {
 
 /**
  * Parse a public gallery src like `/gallery/010/photo.jpg`
- * into album id + filename. Returns null if the path is invalid.
+ * into folder id + filename. Accepts a missing leading slash (Sveltia
+ * sometimes writes `gallery/...`). Returns null if the path is invalid.
  */
 function parseGallerySrc(
   src: string,
-): { albumId: string; filename: string } | null {
-  if (!src.startsWith("/gallery/")) return null;
+): { folderId: string; filename: string; publicSrc: string } | null {
+  let normalized = src.trim();
+  try {
+    normalized = decodeURIComponent(normalized);
+  } catch {
+    // Keep the trimmed original when it is not URI-encoded.
+  }
 
-  const relative = src.slice("/gallery/".length);
+  if (normalized.startsWith("gallery/")) {
+    normalized = `/${normalized}`;
+  }
+
+  if (!normalized.startsWith("/gallery/")) return null;
+
+  const relative = normalized.slice("/gallery/".length);
   const parts = relative.split("/").filter(Boolean);
   if (parts.length !== 2) return null;
 
-  const [albumId, filename] = parts;
-  if (!albumId || !filename || albumId.includes("..") || filename.includes("..")) {
+  const [folderId, filename] = parts;
+  if (
+    !folderId ||
+    !filename ||
+    folderId.includes("..") ||
+    filename.includes("..")
+  ) {
     return null;
   }
   if (!isSupportedMediaFile(filename)) return null;
 
-  return { albumId, filename };
+  return {
+    folderId,
+    filename,
+    publicSrc: `/gallery/${folderId}/${filename}`,
+  };
 }
 
 async function readMediaFromDir(
@@ -234,17 +255,23 @@ async function getAlbumsFromManifest(
 
       const parsed = parseGallerySrc(rawItem.src);
       if (!parsed) continue;
-      if (parsed.albumId !== albumId) continue;
-      if (seenSrcs.has(rawItem.src)) continue;
+      if (seenSrcs.has(parsed.publicSrc)) continue;
 
-      const absolutePath = path.join(galleryDir, albumId, parsed.filename);
+      // Resolve the file from the src folder, not the CMS album id.
+      // Sveltia users sometimes change the Album folder ID without
+      // moving photos, which used to drop the whole album.
+      const absolutePath = path.join(
+        galleryDir,
+        parsed.folderId,
+        parsed.filename,
+      );
       if (!(await fileExists(absolutePath))) continue;
 
-      seenSrcs.add(rawItem.src);
+      seenSrcs.add(parsed.publicSrc);
       media.push(
         toMedia(
           parsed.filename,
-          rawItem.src,
+          parsed.publicSrc,
           albumId,
           optionalTitle(rawItem.title),
         ),
