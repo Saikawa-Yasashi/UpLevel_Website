@@ -237,10 +237,6 @@
         {
           "src": "/gallery/040/IMG-2761-from-Google-Messages.jpg",
           "title": ""
-        },
-        {
-          "src": "gallery/d5bbe1816faf/Tiny House Pic.JPG",
-          "title": ""
         }
       ]
     },
@@ -281,12 +277,12 @@
       ]
     },
     {
-      "id": "070",
-      "title": "",
+      "id": "007",
+      "title": "y's",
       "media": [
         {
           "src": "/gallery/070/IMG_0891.jpg",
-          "title": ""
+          "title": "Location:  Jackson Hole, Wyoming"
         },
         {
           "src": "/gallery/070/IMG_8949.jpg",
@@ -303,45 +299,25 @@
       ]
     },
     {
-      "id": "080",
+      "id": "008",
       "title": "",
       "media": [
         {
-          "src": "/gallery/080/IMG_1972.jpg",
+          "src": "gallery/7676d6de69ee/Tiny House Pic.JPG",
           "title": ""
         }
       ]
     },
     {
       "id": "090",
-      "title": "",
+      "title": "Hellman's",
       "media": [
         {
-          "src": "/gallery/090/IMG_2957.jpg",
-          "title": ""
-        },
-        {
           "src": "/gallery/090/IMG_2960.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/090/IMG_2971.jpg",
-          "title": ""
+          "title": "Custom Home in Jackson Hole, Wyoming"
         },
         {
           "src": "/gallery/090/IMG_3053.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/090/IMG_3626.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/090/IMG_4501.jpg",
-          "title": ""
-        },
-        {
-          "src": "/gallery/090/IMG_4551.jpg",
           "title": ""
         },
         {
@@ -350,6 +326,18 @@
         },
         {
           "src": "/gallery/090/IMG_4578.jpg",
+          "title": ""
+        },
+        {
+          "src": "/gallery/090/IMG_2971.jpg",
+          "title": ""
+        },
+        {
+          "src": "/gallery/090/IMG_4501.jpg",
+          "title": ""
+        },
+        {
+          "src": "/gallery/090/IMG_4551.jpg",
           "title": ""
         },
         {
@@ -384,7 +372,7 @@
       "media": [
         {
           "src": "/gallery/100/IMG_1999.jpg",
-          "title": ""
+          "title": "Location:  Houghton, Michigan"
         },
         {
           "src": "/gallery/100/IMG_2019.jpg",
@@ -410,7 +398,7 @@
       "media": [
         {
           "src": "/gallery/110/IMG_1433.jpg",
-          "title": ""
+          "title": "Kitchen Remodel. Location:  Houghton, Michigan"
         },
         {
           "src": "/gallery/110/IMG_1434.jpg",
