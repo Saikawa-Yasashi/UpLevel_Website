@@ -2,11 +2,11 @@
   "albums": [
     {
       "id": "001",
-      "title": "THE BARNS",
+      "title": "The Barns.  Location:  Jackson Hole, Wyoming",
       "media": [
         {
           "src": "/gallery/010/10.jpg",
-          "title": "THE BARNS    LOCATION: JACKSON HOLE, WYOMING"
+          "title": ""
         },
         {
           "src": "/gallery/010/IMG_6090.jpg",
@@ -96,11 +96,11 @@
     },
     {
       "id": "002",
-      "title": "SULLY",
+      "title": "Location:  Jackson Hole, Wyoming",
       "media": [
         {
           "src": "/gallery/020/IMG_3018.jpg",
-          "title": "LOCATION:  JACKSON HOLE, WYOMING"
+          "title": ""
         },
         {
           "src": "/gallery/020/IMG_3017.jpg",
@@ -146,11 +146,11 @@
     },
     {
       "id": "003",
-      "title": "BIG RIG",
+      "title": "Custom Overland Vehicle.     Location:  Jackson Hole, Wyoming",
       "media": [
         {
           "src": "/gallery/030/IMG_0575.png",
-          "title": "CUSTOM OVERLAND VEHICLE  LOCATION: JACKSON HOLE, WY"
+          "title": ""
         },
         {
           "src": "/gallery/030/IMG_0488.jpg",
@@ -192,7 +192,7 @@
     },
     {
       "id": "004",
-      "title": "TINY HOUSE #1",
+      "title": "Tiny Home.  Built in Traverse City, Michigan",
       "media": [
         {
           "src": "/gallery/040/IMG-1076-from-Google-Messages.jpg",
@@ -220,7 +220,7 @@
         },
         {
           "src": "/gallery/040/IMG-0063-from-Google-Messages.jpg",
-          "title": ""
+          "title": "Relocated to Jackson Hole, Wyoming"
         },
         {
           "src": "/gallery/040/IMG-2270-from-Google-Messages.jpg",
